@@ -17,61 +17,7 @@ CakePlugin::load('CakeSpreadsheet', ['bootstrap' => true, 'routes' => true]);
 
 ## Using this plugin
 
-1. In your `Controller`:
-  - Add the `RequestHandler` component to `AppController`, and map `xlsx` to 
-    the CakeSpreadsheet plugin, e.g.:
-```php
-public $components = [
-    ...,
-    'RequestHandler' => [
-        'viewClassMap' => [
-            'xlsx' => 'CakeSpreadsheet.Spreadsheet'
-        ]
-    ]
-);
-```
-  - Add to your controller action:
-```php
-public export($id = null)
-{
-    if (!$this->RequestHandler->prefers('pdf')) {
-        throw new BadRequestException(__('Invalid export type');
-    }
-
-    $conditions = [];
-    if (!empty($id)) {
-        $conditions['Model.id'] = $id;
-    }
-    $exportConfig = $this->Model->getExportConfig();
-    $exportData = $this->Model->getExportData();
-
-    $this->set(compact('exportConfig', 'exportData'));
-}
-```
-2. In your `View`:
-  - Create a link to the a action with the extension `.xlsx`, e.g.:
-```php
-$this->Html->link('Excel file', ['ext' => 'xlsx']);
-```
-  - Place the View templates in the subdirectory `Spreadsheet`, e.g.:
-    `app/View/Invoices/Spreadsheet/index.ctp`
-```php
-if (isset($fileName)) {
-    $this->setFileName($fileName);
-}
-
-$this->Spreadsheet->getDefaultStyle()->applyFromArray([
-    'font' => [
-        'name' => 'Arial Cyr',
-        'size' => 10,
-    ],
-]);
-```
-  - Use the `CakeSpreadsheet.exportExcelTable` element in your View file, e.g.:
-```php
-echo $this->element('CakeSpreadsheet.exportExcelTable', compact('exportConfig', 'exportData'));
-```
-3. In your `Model`:
+1. In your `Model`:
   - Create the following methods:
 ```php
 public function getExportConfig()
@@ -102,4 +48,58 @@ public function getExportData($conditions = [])
 
     return $result;
 }
+```
+2. In your `Controller`:
+  - Add the `RequestHandler` component to `AppController`, and map `xlsx` to 
+    the CakeSpreadsheet plugin, e.g.:
+```php
+public $components = [
+    ...,
+    'RequestHandler' => [
+        'viewClassMap' => [
+            'xlsx' => 'CakeSpreadsheet.Spreadsheet'
+        ]
+    ]
+);
+```
+  - Add to your controller action:
+```php
+public export($id = null)
+{
+    if (!$this->RequestHandler->prefers('pdf')) {
+        throw new BadRequestException(__('Invalid export type');
+    }
+
+    $conditions = [];
+    if (!empty($id)) {
+        $conditions['Model.id'] = $id;
+    }
+    $exportConfig = $this->Model->getExportConfig();
+    $exportData = $this->Model->getExportData();
+
+    $this->set(compact('exportConfig', 'exportData'));
+}
+```
+3. In your `View`:
+  - Create a link to the a action with the extension `.xlsx`, e.g.:
+```php
+$this->Html->link('Excel file', ['ext' => 'xlsx']);
+```
+  - Place the View templates in the subdirectory `Spreadsheet`, e.g.:
+    `app/View/Invoices/Spreadsheet/index.ctp`
+```php
+if (isset($fileName)) {
+    $this->setFileName($fileName);
+}
+
+$this->Spreadsheet->getDefaultStyle()->applyFromArray([
+    'font' => [
+        'name' => 'Arial Cyr',
+        'size' => 10,
+    ],
+]);
+```
+  - Use the `CakeSpreadsheet.exportExcelTable` element in your View file, e.g.:
+```php
+echo $this->element('CakeSpreadsheet.exportExcelTable', compact('exportConfig', 'exportData'));
 ```
