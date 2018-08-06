@@ -66,7 +66,7 @@ public $components = [
 ```php
 public export($id = null)
 {
-    if (!$this->RequestHandler->prefers('pdf')) {
+    if (!$this->RequestHandler->prefers('xlsx')) {
         throw new BadRequestException(__('Invalid export type');
     }
 
