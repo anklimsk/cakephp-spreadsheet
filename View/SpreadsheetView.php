@@ -9,7 +9,7 @@
 
 App::uses('View', 'View');
 App::import('Vendor', 'CakeSpreadsheet.Spreadsheet', ['file' => 'phpspreadsheet' . DS . 'autoload.php']);
-App::uses('Language', 'CakeTheme.Utility');
+App::uses('Language', 'CakeBasicFunctions.Utility');
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
