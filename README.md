@@ -68,7 +68,7 @@ Generate MS Excel files with the CakePHP
       ];
       ```
 
-  - Add to your controller action:
+   - Add to your controller action:
 
       ```php
       public export($id = null) {
