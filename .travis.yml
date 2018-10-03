@@ -27,7 +27,7 @@ matrix:
 before_script:
   - git clone -b master https://github.com/FriendsOfCake/travis.git --depth 1 ../travis
   - travis_wait ../travis/before_script.sh
-  - ../cakephp/app/Console/cake CakeInstaller setsecurkey --app ../cakephp/app
+  - ../cakephp/app/Console/cake CakeInstaller setsecurkey --app $(cd ../cakephp/app; pwd)
   - if [ -f "../cakephp/app/phpunit.xml" ]; then sed -i -r "s/(<directory suffix=\"\.php\">Plugin\/\w+\/)vendor(<\/directory>)/\1Vendor\2/" ../cakephp/app/phpunit.xml; fi
 
 script:
