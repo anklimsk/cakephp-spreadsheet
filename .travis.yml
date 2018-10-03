@@ -4,6 +4,10 @@ php:
   - 5.6
   - 7.1
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
 env:
   global:
     - PLUGIN_NAME=CakeSpreadsheet
