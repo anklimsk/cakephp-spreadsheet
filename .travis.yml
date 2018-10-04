@@ -23,7 +23,7 @@ matrix:
     - php: 7.1
       env:
         - PHPCS=1
-        - PHPCS_IGNORE=CakeBasicFunctions,CakeExtendTest,CakeInstaller,CakeConfigPlugin
+        - PHPCS_IGNORE=CakeInstaller,CakeBasicFunctions,CakeConfigPlugin,CakeExtendTest
     - php: 7.1
       env:
         - FOC_VALIDATE=1
@@ -31,7 +31,7 @@ matrix:
 before_script:
   - git clone -b master https://github.com/FriendsOfCake/travis.git --depth 1 ../travis
   - travis_wait ../travis/before_script.sh
-  - if [ -f "../cakephp/app/Console/cake" ]; then ../cakephp/app/Console/cake CakeInstaller setsecurkey --app $(cd ../cakephp/app; pwd); fi
+  - if [ -f "../cakephp/app/Console/cake" ]; then ../cakephp/app/Console/cake CakeInstaller setsecurkey --yes --app $(cd ../cakephp/app; pwd); fi
   - if [ -f "../cakephp/app/phpunit.xml" ]; then sed -i -r "s/(<directory suffix=\"\.php\">Plugin\/\w+\/)vendor(<\/directory>)/\1Vendor\2/" ../cakephp/app/phpunit.xml; fi
 
 script:
